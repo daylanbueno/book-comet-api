@@ -22,6 +22,7 @@ public class BookResource {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     public DtoBook save(@RequestBody @Valid DtoBook dtoBook) {
         return bookService.save(dtoBook);
     }
