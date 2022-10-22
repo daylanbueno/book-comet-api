@@ -46,4 +46,15 @@ public class BookResource {
         return bookService.findByPublisher(publisher);
     }
 
+    @PostMapping("/{id}/inventories/{quantity}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public Long addInvetory(@PathVariable("id")  Long idBook, @PathVariable Long quantity) {
+        return bookService.setInventory(idBook, quantity);
+    }
+
+    @DeleteMapping("/inventories/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteInventory(@PathVariable("id")  Long id) {
+        bookService.deleteInventoryById(id);
+    }
 }

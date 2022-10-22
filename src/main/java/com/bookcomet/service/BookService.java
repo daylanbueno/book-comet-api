@@ -17,4 +17,7 @@ public interface BookService {
 
     public List<DtoBook> findByPublisher(String publisher);
 
+    public Long setInventory(Long bookId, Long quantity);
+
+    public void deleteInventoryById(Long id);
 }
