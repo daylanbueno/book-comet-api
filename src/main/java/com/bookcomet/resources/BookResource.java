@@ -28,7 +28,7 @@ public class BookResource {
     }
 
     @PutMapping
-    public DtoBook update(@RequestBody DtoBook dtoBook) {
+    public DtoBook update(@RequestBody @Valid DtoBook dtoBook) {
         return bookService.update(dtoBook);
     }
 
