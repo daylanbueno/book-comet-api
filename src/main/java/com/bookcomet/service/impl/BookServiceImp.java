@@ -42,6 +42,10 @@ public class BookServiceImp implements BookService {
         if (dtoBook.getId() == null)
             throw new BusinessException("Book ID is required for change.");
 
+        bookRepository.
+                findById(dtoBook.getId()).orElseThrow(() -> new BusinessException("There is no book with the given ID"));
+
+
         Book book = bookRepository.save(bookConverter.converterToEntity(dtoBook));
 
         return bookConverter.converterToDto(book);

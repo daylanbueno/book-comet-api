@@ -78,10 +78,11 @@ public class BookServiceTest {
 		DtoBook mockDtoBook = DtoBook.builder().name("Clean code").id(idBook).author("Eduardo").build();
 
 		Mockito.when(bookRepostiroy.save(Mockito.any())).thenReturn(mockBookEntity);
+		Mockito.when(bookRepostiroy.findById(Mockito.any())).thenReturn(Optional.of(mockBookEntity));
 		Mockito.when(bookConverter.converterToEntity(Mockito.any())).thenReturn(mockBookEntity);
 		Mockito.when(bookConverter.converterToDto(Mockito.any())).thenReturn(mockDtoBook);
 
-		DtoBook newBook = bookService.save(mockDtoBook);
+		DtoBook newBook = bookService.update(mockDtoBook);
 
 		assertThat(newBook.getId()).isNotNull();
 		assertThat(newBook.getId()).isEqualTo(mockDtoBook.getId());
@@ -111,6 +112,18 @@ public class BookServiceTest {
 		Throwable exception = Assertions.catchThrowable(() -> bookService.update(mockDtoBook));
 
 		assertThat(exception).isInstanceOf(BusinessException.class).hasMessage("Book ID is required for change.");
+	}
+
+	@Test
+	@DisplayName("should fail to update no-existent book")
+	public void shouldFailToUpdateNoExistentBook() {
+		DtoBook mockDtoBook = createNewValidDtoBook(); mockDtoBook.setId(idBook);
+
+		Mockito.when(bookRepostiroy.findById(idBook)).thenReturn(Optional.empty());
+
+		Throwable exception = Assertions.catchThrowable(() -> bookService.update(mockDtoBook));
+
+		assertThat(exception).isInstanceOf(BusinessException.class).hasMessage("There is no book with the given ID");
 	}
 
 	@Test
