@@ -43,6 +43,6 @@ You just need to import in postman and you will be able to do the tests.
 
 
 ### Visit my repositories to see more projects like this.
-https://github.com/daylanbueno/sw-service
-https://github.com/daylanbueno/library-api
+- https://github.com/daylanbueno/sw-service
+- https://github.com/daylanbueno/library-api
 
