@@ -12,7 +12,7 @@ You received only the following information from the business team:
 - Java
 - JDK 17
 - Spring Boot
-- Sring Data JPA
+- Spring Data JPA
 - Lombok
 - Junit
 - H2 Database
