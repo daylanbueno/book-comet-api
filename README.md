@@ -45,4 +45,6 @@ You just need to import in postman and you will be able to do the tests.
 ### Visit my repositories to see more projects like this.
 - https://github.com/daylanbueno/sw-service
 - https://github.com/daylanbueno/library-api
+- ![teste-book](https://user-images.githubusercontent.com/17939912/197416551-7e06664d-5479-4d40-8ed0-9bcab2eaa0dd.gif)
+
 
