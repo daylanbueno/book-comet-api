@@ -18,6 +18,7 @@ You received only the following information from the business team:
 - H2 Database
 - Modelmapper
 - Docker
+- JJWT
 
 
 ### Intalation.
