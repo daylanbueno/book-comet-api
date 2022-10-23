@@ -4,6 +4,7 @@ import com.bookcomet.config.JwtService;
 import com.bookcomet.converters.UserConverter;
 import com.bookcomet.dto.DtoUser;
 import com.bookcomet.entity.User;
+import com.bookcomet.exceptions.BusinessException;
 import com.bookcomet.exceptions.InvalidLoginOrPassword;
 import com.bookcomet.repository.UserRepository;
 import com.bookcomet.service.UserService;
@@ -28,6 +29,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public DtoUser save(DtoUser dtoUser) {
         User user = userConverter.converterToEntity(dtoUser);
+
+        userRepository.findByEmail(dtoUser.getEmail())
+                        .orElseThrow(() -> new BusinessException("The user is already registered"));
 
         user.setPassword(passwordEncoder.encode(dtoUser.getPassword()));
 
