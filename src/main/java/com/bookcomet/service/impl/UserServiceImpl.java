@@ -30,8 +30,9 @@ public class UserServiceImpl implements UserService {
     public DtoUser save(DtoUser dtoUser) {
         User user = userConverter.converterToEntity(dtoUser);
 
-        userRepository.findByEmail(dtoUser.getEmail())
-                        .orElseThrow(() -> new BusinessException("The user is already registered"));
+        if(userRepository.existsByEmail(dtoUser.getEmail())) {
+            throw new BusinessException("The user is already registered");
+        }
 
         user.setPassword(passwordEncoder.encode(dtoUser.getPassword()));
 
