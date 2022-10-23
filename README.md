@@ -25,7 +25,7 @@ mvn install
 
 ### Create docker image
 - The command must be run in the folder where the dockerfile is
-docker build  -t book-comet-api:1.0 .
+- docker build  -t book-comet-api:1.0 .
 
 
 
