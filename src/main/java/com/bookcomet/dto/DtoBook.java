@@ -21,4 +21,6 @@ public class DtoBook {
     private String publisher;
     private Integer yearOfPublication;
     private String summary;
+    private String type;
+    private String format;
 }
