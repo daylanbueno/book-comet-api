@@ -13,6 +13,7 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "tb_inventory")
 public class BookInventory {
     @Id
     @GeneratedValue

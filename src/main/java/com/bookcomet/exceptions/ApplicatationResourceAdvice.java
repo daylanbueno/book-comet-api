@@ -26,6 +26,12 @@ public class ApplicatationResourceAdvice {
         return new ApiError(ex.getMessage());
     }
 
+    @ExceptionHandler(InvalidLoginOrPassword.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ApiError handleInvalidLoginOrPassword(InvalidLoginOrPassword ex) {
+        return new ApiError(ex.getMessage());
+    }
+
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ApiError handleMethodArgumentNotValidException(MethodArgumentNotValidException ex) {

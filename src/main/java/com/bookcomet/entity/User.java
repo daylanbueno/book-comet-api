@@ -10,19 +10,17 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Data
 @Builder
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tb_book")
-public class Book {
+@Table(name = "tb_user")
+public class User {
+
     @Id
     @GeneratedValue
     private Long id;
-    private String name;
-    private String author;
-    private String publisher;
-    private Integer yearOfPublication;
-    private String summary;
+    private String email;
+    private String password;
 }
