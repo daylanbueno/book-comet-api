@@ -3,6 +3,7 @@ package com.bookcomet.service;
 import com.bookcomet.converters.BookConverter;
 import com.bookcomet.dto.DtoBook;
 import com.bookcomet.entity.Book;
+import com.bookcomet.entity.BookInventory;
 import com.bookcomet.exceptions.BusinessException;
 import com.bookcomet.repository.BookInventoryRepository;
 import com.bookcomet.repository.BookRepository;
@@ -111,6 +112,47 @@ public class BookServiceTest {
 
 		assertThat(exception).isInstanceOf(BusinessException.class).hasMessage("Book ID is required for change.");
 	}
+
+	@Test
+	@DisplayName("should delete a book successfully")
+	public void shouldDeleteBookSuccessfully() {
+		Book mockBook = createNewValidBook();
+
+		Mockito.when(bookRepostiroy.findById(idBook)).thenReturn(Optional.of(mockBook));
+		Mockito.when(bookInventoryRepository.findByBook(mockBook)).thenReturn(null);
+
+		bookService.deleteById(idBook);
+
+		Mockito.verify(bookRepostiroy, Mockito.times(1)).deleteById(idBook);
+	}
+
+	@Test
+	@DisplayName("should fail to delete  no-existent book")
+	public void shouldFailToDeleteNoExistentBook() {
+		Mockito.when(bookRepostiroy.findById(idBook)).thenReturn(Optional.empty());
+		Throwable exception = Assertions.catchThrowable(() -> bookService.deleteById(idBook));
+		assertThat(exception).isInstanceOf(IllegalArgumentException.class).hasMessage("There is no book with the given ID");
+	}
+
+	@Test
+	@DisplayName("should fail to delete  book with a posive inventory")
+	public void shouldFailToDeleteBookWithPosiveInventory() {
+		Book book = createNewValidBook(); book.setId(idBook);
+
+		BookInventory mockInventory = BookInventory.builder()
+				.book(book)
+				.id(123L)
+				.quantity(55L)
+				.build();
+
+		Mockito.when(bookRepostiroy.findById(idBook)).thenReturn(Optional.of(book));
+		Mockito.when(bookInventoryRepository.findByBook(book)).thenReturn(mockInventory);
+
+
+		Throwable exception = Assertions.catchThrowable(() -> bookService.deleteById(idBook));
+		assertThat(exception).isInstanceOf(BusinessException.class).hasMessage("Cannot delete book because it has positive inventory.");
+	}
+
 
 	private DtoBook createNewValidDtoBook() {
 		return DtoBook.builder()
