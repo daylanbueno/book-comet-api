@@ -12,7 +12,7 @@ You received only the following information from the business team:
 - Java
 - JDK 17
 - Spring Boot
-- Sring Data JPA
+- Spring Data JPA
 - Lombok
 - Junit
 - H2 Database
@@ -25,7 +25,7 @@ mvn install
 
 ### Create docker image
 - The command must be run in the folder where the dockerfile is
-docker build  -t book-comet-api:1.0 .
+- docker build  -t book-comet-api:1.0 .
 
 
 
@@ -40,4 +40,9 @@ After the application is running. Inside the project, there is a postman folder 
 You just need to import in postman and you will be able to do the tests.
 
 ![image](https://user-images.githubusercontent.com/17939912/197399174-51cf99a5-e8a7-4d38-8173-a042afb34814.png)
+
+
+### Visit my repositories to see more projects like this.
+- https://github.com/daylanbueno/sw-service
+- https://github.com/daylanbueno/library-api
 
